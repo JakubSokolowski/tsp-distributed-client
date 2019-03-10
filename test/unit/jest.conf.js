@@ -8,6 +8,7 @@ module.exports = {
     'json',
     'vue'
   ],
+  testURL: 'http://localhost/',
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1'
   },
@@ -22,11 +23,11 @@ module.exports = {
   testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.ts?$',
   snapshotSerializers: ['<rootDir>/node_modules/jest-serializer-vue'],
   setupFiles: ['<rootDir>/test/unit/setup'],
-  mapCoverage: true,
   coverageDirectory: '<rootDir>/test/unit/coverage',
   collectCoverageFrom: [
     'src/**/*.{ts,vue}',
     '!src/main.ts',
+    '!src/store/index.ts',
     '!src/router/index.ts',
     '!src/typings.d.ts',
     '!**/node_modules/**'
