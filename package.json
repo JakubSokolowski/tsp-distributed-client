@@ -2,7 +2,7 @@
   "name": "tsp-distributed-client",
   "version": "1.0.0",
   "build": "1",
-  "description": "A Vue.js project",
+  "description": "Client for distributed Travelling Salesman Problem solver",
   "author": "Jakub Sokołowski <jakub.sokolowski1996@gmail.com>",
   "environment": "",
   "platform": "",
@@ -14,6 +14,7 @@
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",
     "lint": "tslint -p ./ && eslint --ext .js,.vue src test/unit test/e2e/specs",
+    "lint-fix": "tslint --fix -p ./ && eslint --ext .js,.vue src test/unit test/e2e/specs",
     "build": "node build/build.js"
   },
   "dependencies": {
