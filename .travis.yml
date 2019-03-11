@@ -13,6 +13,7 @@ notifications:
   email: false
 
 node_js:
+  - "11.10.0"
   - node
 
 stages:
