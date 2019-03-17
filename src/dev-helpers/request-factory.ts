@@ -1,12 +1,5 @@
 import { RequestType } from './request-type';
-
-type User = {
-  username: string,
-  password: string,
-  firstName: string,
-  lastName: string,
-  id: number
-};
+import { User } from "../services/auth/user";
 
 class RequestFactory {
   static users: User[] = JSON.parse(<string>localStorage.getItem('users')) || [];
