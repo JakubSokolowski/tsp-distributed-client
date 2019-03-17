@@ -1,7 +1,7 @@
-import Vue from "vue";
-import * as Vuex from "vuex";
-import { getStoreAccessors } from "vuex-typescript";
-import { State } from "./state";
+import Vue from 'vue';
+import * as Vuex from 'vuex';
+import { getStoreAccessors } from 'vuex-typescript';
+import { State } from './state';
 
 Vue.use(Vuex);
 
@@ -53,7 +53,7 @@ export const createStore = () => new Vuex.Store<State>({
   actions: actions
 });
 
-const { read, commit, dispatch } = getStoreAccessors<State, State>("");
+const { read, commit, dispatch } = getStoreAccessors<State, State>('');
 
 /*************************************************/
 /* GETTERS */

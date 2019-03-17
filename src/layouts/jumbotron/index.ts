@@ -1,9 +1,9 @@
-import Vue from "vue";
-import { Component, Prop } from "vue-property-decorator";
-import * as Logger from "js-logger";
+import Vue from 'vue';
+import { Component, Prop } from 'vue-property-decorator';
+import * as Logger from 'js-logger';
 
-import Hello from "../../components/hello";
-import template from "./jumbotron.vue";
+import Hello from '../../components/hello';
+import template from './jumbotron.vue';
 
 @Component({
   mixins: [template],
