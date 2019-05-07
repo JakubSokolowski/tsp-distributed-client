@@ -8,6 +8,7 @@ import UserIsLogin from "./UserIsLogin.vue";
 import UserIsLogout from "./UserIsLogout.vue";
 import EditDataOfUser from "./EditDataOfUser.vue";
 import RegistrationUser from "./RegistrationUser.vue";
+import InputDataOfTSP from "./InputDataOfTSP.vue";
 import { store } from "./store.js"
 
 Vue.use(VueRouter);
@@ -44,6 +45,15 @@ const routes = [
     path: "/edytujDane", get component() {
       if (store.getters.isLoged == true) {
         return EditDataOfUser;
+      } else {
+        return NotAccess;
+      }
+    }
+  },
+  {
+    path: "/wprowadzDane", get component() {
+      if (store.getters.isLoged == true) {
+        return InputDataOfTSP;
       } else {
         return NotAccess;
       }

@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <div v-if="isLoged" class="Menu">
+      <router-link class="itemMenu" to="/wprowadzDane">Rozwiąż instancje TSP</router-link>
       <router-link class="itemMenu" to="/edytujDane">Edytuj dane</router-link>
       <router-link class="itemMenu" to="/wyloguj">Wyloguj</router-link>
     </div>
