@@ -41,6 +41,15 @@ var DataAccess = {
             return response;
         });
     },
+    //na razie przesyłanie jest bezpośrednio w komponencie FileUpload
+    sendFile(file) {
+
+        return axios.post(
+            "http://" + this.adresIPPort + "/myapp/Pliki???", file
+        ).then(response => {
+            return response;
+        });
+    },
 }
 export default DataAccess
 

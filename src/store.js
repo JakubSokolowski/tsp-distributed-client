@@ -53,6 +53,7 @@ export const store = new Vuex.Store({
     actions: {
         login(context, user) {
             return DataAccess.login(user).then(data => {
+                // eslint-disable-next-line no-console
                 console.log(data);
                 if (data != null) {
                     context.commit("login", user);
