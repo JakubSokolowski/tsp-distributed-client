@@ -9,6 +9,7 @@ import UserIsLogout from "./UserIsLogout.vue";
 import EditDataOfUser from "./EditDataOfUser.vue";
 import RegistrationUser from "./RegistrationUser.vue";
 import InputDataOfTSP from "./InputDataOfTSP.vue";
+import FileUpload from "./FileUpload.vue"
 import { store } from "./store.js"
 
 Vue.use(VueRouter);
@@ -54,6 +55,15 @@ const routes = [
     path: "/wprowadzDane", get component() {
       if (store.getters.isLoged == true) {
         return InputDataOfTSP;
+      } else {
+        return NotAccess;
+      }
+    }
+  },
+  {
+    path: "/przeslijPlik", get component() {
+      if (store.getters.isLoged == true) {
+        return FileUpload;
       } else {
         return NotAccess;
       }
