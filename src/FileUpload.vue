@@ -2,16 +2,18 @@
   <div>
     <Menu/>
     <div class="Content">
-      <p>Prześlij plik</p>
-      <div>
-        Wybierz plik do przesłania:
-      </div>
-      <div>
-        <input accept=".tsp, .atsp, .xml" type="file" id="file" ref="file" @change="handleFileUpload()"/>
-      </div>  
-      <div> 
-        <input type="button" value="Wyślij" @click="submitFile">
-      </div>
+      <form enctype="multipart/form-data">
+        <p>Prześlij plik</p>
+        <div>
+          Wybierz plik do przesłania:
+        </div>
+        <div>
+          <input accept=".tsp, .atsp, .xml" type="file" id="file" ref="file" @change="handleFileUpload()"/>
+        </div>  
+        <div> 
+          <input type="button" value="Wyślij" @click="submitFile">
+        </div>
+      </form>
     </div>
   </div>
 </template>
@@ -67,7 +69,7 @@
     //na razie w wersji powyższej
     sendFile() {
       let formData = new FormData();
-      DataAccess.sendFIle(formData)
+      DataAccess.sendFile(formData)
         .then(response => {
           this.comunicats = [];
           this.comunicats.push(response.data);
