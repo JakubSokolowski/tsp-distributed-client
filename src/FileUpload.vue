@@ -40,21 +40,24 @@
       submitFile(){
 
             let formData = new FormData();
-            const url = `http://localhost:8086/Pliki???`;
+            const url = `http://localhost:8086/myapp/Files`;
             formData.append('file', this.file);
-
+            
             axios.post( url, formData,
                 {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
+                
               }
+              
             ).then(function(){
           console.log('Submit succesfully!');
         })
         .catch(function(){
           console.log('Submit failed!');
         });
+        
       },
 
       handleFileUpload(){
