@@ -45,7 +45,7 @@ var DataAccess = {
     sendFile(file) {
 
         return axios.post(
-            "http://" + this.adresIPPort + "/myapp/Pliki???", file
+            "http://" + this.adresIPPort + "/myapp/Pliki", file
         ).then(response => {
             return response;
         });

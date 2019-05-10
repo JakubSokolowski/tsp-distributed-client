@@ -2,16 +2,18 @@
   <div>
     <Menu/>
     <div class="Content">
-      <p>Prześlij plik</p>
-      <div>
-        Wybierz plik do przesłania:
-      </div>
-      <div>
-        <input accept=".tsp, .atsp, .xml" type="file" id="file" ref="file" @change="handleFileUpload()"/>
-      </div>  
-      <div> 
-        <input type="button" value="Wyślij" @click="submitFile">
-      </div>
+      <form enctype="multipart/form-data">
+        <p>Prześlij plik</p>
+        <div>
+          Wybierz plik do przesłania:
+        </div>
+        <div>
+          <input accept=".tsp, .atsp, .xml" type="file" id="file" ref="file" @change="handleFileUpload()"/>
+        </div>  
+        <div> 
+          <input type="button" value="Wyślij" @click="submitFile">
+        </div>
+      </form>
     </div>
   </div>
 </template>
@@ -39,21 +41,23 @@
 
       submitFile(){
 
-            let formData = new FormData();
-            const url = `http://localhost:8086/Pliki???`;
+            var formData = new FormData();
+            const url = "http://localhost:8086/myapp/Pliki";
             formData.append('file', this.file);
 
-            axios.post( url, formData,
-                {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-              }
-            ).then(function(){
-          console.log('Submit succesfully!');
-        })
-        .catch(function(){
-          console.log('Submit failed!');
+          axios({
+            method: 'post',
+            url: url,
+            data: formData,
+            config: { headers: {'Content-Type': 'multipart/form-data' }}
+          })
+          .then(function (response) {
+            alert("Pomyślnie przesłano plik!");
+            console.log(response);
+          })
+          .catch(function (response) {
+            alert("Błąd przesyłania pliku!");
+            console.log(response);
         });
       },
 
@@ -64,7 +68,7 @@
     //na razie w wersji powyższej
     sendFile() {
       let formData = new FormData();
-      DataAccess.sendFIle(formData)
+      DataAccess.sendFile(formData)
         .then(response => {
           this.comunicats = [];
           this.comunicats.push(response.data);
