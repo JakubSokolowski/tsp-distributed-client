@@ -24,6 +24,7 @@
               <span v-else>{{City}}</span>
             </span>
           </p>
+          Postęp rozwiązywania: {{Problem.percentageOfProgress}}%
         </div>
       </div>
     </div>
