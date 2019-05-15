@@ -3,13 +3,28 @@
     <Menu/>
     <div class="Content">
       <div v-for="Problem in problems" :key="Problem.id">
-        <p>Koszt: {{Problem.cost}}</p>
-        <p>Trasa: 
-        <b v-for="(City,index) in Problem.tour" :key="'tour:' + Problem.id + 'City:' +index">
-          <b v-if="index != 0">->{{City}}</b>
-          <b v-else>{{City}}</b>
-        </b>
-        </p>
+        <p>Data zlecenia: {{Problem.dateOfOrdering}}</p>
+        <p>Typ algorytmu: {{Problem.algorithm}}</p>
+        <div>
+          Macierz:
+          <p v-for="(Row,index) in Problem.graph.costMatrix" :key="'Row'+index">
+            <span v-for="(City,index) in Row" :key="'Row City' + index">{{City}},</span>
+          </p>
+        </div>
+        <div v-if="Problem.tour != null">
+          Wynik:
+          <p>Koszt: {{Problem.cost}}</p>
+          <p>
+            Trasa:
+            <span
+              v-for="(City,index) in Problem.tour"
+              :key="'tour:' + Problem.id + 'City:' +index"
+            >
+              <span v-if="index != 0">->{{City}}</span>
+              <span v-else>{{City}}</span>
+            </span>
+          </p>
+        </div>
       </div>
     </div>
   </div>
