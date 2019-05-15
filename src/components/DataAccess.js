@@ -26,7 +26,7 @@ var DataAccess = {
             "http://" + this.adresIPPort + "/myapp/Uzytkownicy",
             user, {
                 params: null,
-                
+
                 auth: {
                     username: store.getters.username,
                     password: oldPassword
@@ -37,6 +37,20 @@ var DataAccess = {
     addUser(user) {
         return axios.post(
             "http://" + this.adresIPPort + "/myapp/Uzytkownicy", user
+        ).then(response => {
+            return response;
+        });
+    },
+    getProblems() {
+        return axios.get(
+            "http://" + this.adresIPPort + "/myapp/Problems",
+            {
+                params: null,
+                auth: {
+                    username: store.getters.username,
+                    password: store.getters.password 
+                }
+            }
         ).then(response => {
             return response;
         });

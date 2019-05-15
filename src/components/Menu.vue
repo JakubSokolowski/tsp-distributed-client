@@ -2,7 +2,7 @@
   <div id="app">
     <div v-if="isLoged" class="Menu">
       <router-link class="itemMenu" to="/przeslijPlik">Prześlij plik</router-link>
-      <router-link class="itemMenu" to="/wprowadzDane">Rozwiąż instancje TSP</router-link>
+      <router-link class="itemMenu" to="/problemy">Instancje problemów</router-link>
       <router-link class="itemMenu" to="/edytujDane">Edytuj dane</router-link>
       <router-link class="itemMenu" to="/wyloguj">Wyloguj</router-link>
     </div>
