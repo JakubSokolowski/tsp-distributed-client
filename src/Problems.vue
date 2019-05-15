@@ -40,18 +40,27 @@ export default {
     Menu
   },
   mounted() {
-    DataAccess.getProblems().then(response => {
-      this.problems = response.data;
-      console.log(response.data);
-    });
+    this.getData();
+    //Period 1s
+    this.timer = setInterval(this.getData, 1000);
   },
   data: function() {
     return {
       problems: [],
-      comunicats: []
+      comunicats: [],
+      timer: ""
     };
   },
-  methods: {}
+  methods: {
+    getData() {
+      DataAccess.getProblems().then(response => {
+        this.problems = response.data;
+      });
+    }
+  },
+  beforeDestroy() {
+    clearInterval(this.timer);
+  }
 };
 </script>
 
