@@ -25,6 +25,7 @@
             </span>
           </p>
           Postęp rozwiązywania: {{Problem.percentageOfProgress}}%
+          <RoundProgressBar :progres="Problem.percentageOfProgress" />
         </div>
       </div>
     </div>
@@ -34,10 +35,12 @@
 <script>
 import Menu from "@/components/Menu.vue";
 import DataAccess from "@/components/DataAccess.js";
+import RoundProgressBar from "@/components/RoundProgressBar.vue";
 export default {
   name: "EditDataOfUser",
   components: {
-    Menu
+    Menu,
+    RoundProgressBar
   },
   mounted() {
     this.getData();
@@ -48,7 +51,8 @@ export default {
     return {
       problems: [],
       comunicats: [],
-      timer: ""
+      timer: "",
+      prog: 10
     };
   },
   methods: {
@@ -56,6 +60,7 @@ export default {
       DataAccess.getProblems().then(response => {
         this.problems = response.data;
       });
+      this.prog += 1;
     }
   },
   beforeDestroy() {
