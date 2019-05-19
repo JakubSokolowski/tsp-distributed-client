@@ -25,7 +25,7 @@
             </span>
           </p>
           Postęp rozwiązywania: {{Problem.percentageOfProgress}}%
-          <RoundProgressBar :progres="Problem.percentageOfProgress" />
+          <RoundProgressBar :progres="Problem.percentageOfProgress" :tour="Problem.tour"/>
         </div>
       </div>
     </div>

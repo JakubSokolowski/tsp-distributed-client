@@ -7,12 +7,12 @@
 <script>
 export default {
   name: "RoundProgressBar",
-  mounted()
-  {
+  mounted() {
     this.paint();
   },
   props: {
-    progres: Number
+    progres: Number,
+    tour: Array
   },
   watch: {
     progres: function() {
@@ -20,8 +20,9 @@ export default {
     }
   },
   methods: {
-    paint(){
-        this.$refs.canvas.width = this.$refs.canvas.parentElement.clientWidth;
+    paint() {
+      let numberOfCircle = this.tour.length - 1;
+      this.$refs.canvas.width = this.$refs.canvas.parentElement.clientWidth;
       this.$refs.canvas.height = this.$refs.canvas.parentElement.clientHeight;
       let canvas = this.$refs.canvas;
       let context = canvas.getContext("2d");
@@ -38,9 +39,54 @@ export default {
       context.arc(x, y, r - thickness, endPoint, -Math.PI / 2, true);
       context.lineTo(x, 0);
       context.fill();
-      context.moveTo(x+0.1*r,y-0.8*r);
-      context.arc(x, y-0.8*r, 0.1*r, 0, 2*Math.PI);
-      context.stroke();
+
+      for (let i = 0; i < numberOfCircle; i++) {
+        let angle = i * (2*Math.PI) / numberOfCircle;
+        context.moveTo(
+          x + 0.8 * r * Math.cos(angle),
+          y + 0.8 * r * Math.sin(angle)
+        );
+        context.font = "30px Arial";
+        context.fillText(i+1+"", x + 0.8 * r * Math.cos(angle), y + 0.8 * r * Math.sin(angle));
+        context.moveTo(
+          x + 0.8 * r * Math.cos(angle) + 0.1 * r,
+          y + 0.8 * r * Math.sin(angle)
+        );
+        context.arc(
+          x + 0.8 * r * Math.cos(angle),
+          y + 0.8 * r * Math.sin(angle),
+          0.1 * r,
+          0,
+          2*Math.PI
+        );
+        context.stroke();
+      }
+
+      for (let i = 0; i < numberOfCircle; i++) {
+        let angleFrom = this.tour[i] * (2*Math.PI) / numberOfCircle;
+        let angleTo = this.tour[i+1] * (2*Math.PI) / numberOfCircle;
+        let fromX = x + 0.8 * r * Math.cos(angleFrom);
+        let fromY = y + 0.8 * r * Math.sin(angleFrom);
+        let toX = x + 0.8 * r * Math.cos(angleTo);
+        let toY = y + 0.8 * r * Math.sin(angleTo);
+        context.moveTo(
+          fromX,
+          fromY
+        );
+        context.lineTo(
+          toX,
+          toY
+        );
+        context.stroke();
+        var angleOfLine = Math.atan2(toY-fromY,toX-fromX);
+        
+        context.lineTo(toX-40*Math.cos(angleOfLine-Math.PI/6),toY-40*Math.sin(angleOfLine-Math.PI/6));
+        context.moveTo(toX, toY);
+        context.lineTo(toX-40*Math.cos(angleOfLine+Math.PI/6),toY-40*Math.sin(angleOfLine+Math.PI/6));
+        context.stroke();
+      }
+
+
     }
   }
 };
