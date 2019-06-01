@@ -4,11 +4,11 @@
     <form>
       <fieldset>
         <legend>Zmiana hasła</legend>
-        <input id="oldPassword" type="password" v-model="oldPassword">
+        <input id="oldPassword" type="password" v-model="oldPassword" required>
         <label for="oldPassword">Stare hasło:</label>
-        <input id="newPassword" type="password" v-model="newPassword">
+        <input id="newPassword" type="password" v-model="newPassword" required>
         <label for="newPassword">Nowe hasło:</label>
-        <input type="button" value="Edytuj hasło" @click="changePassword">
+        <input type="button" value="Edytuj hasło" @click="changePassword" required>
       </fieldset>
     </form>
     <p
@@ -59,9 +59,14 @@ label{
   position: absolute;
   transform: translate(0,-16px);
 }
-input:focus[type="text"] + label,input:focus[type="password"] + label{
-  transform: translate(0,-32px);
+input:focus + label
+{
+  transform: translate(0,-40px);
   color: cornflowerblue;
+}
+input:valid + label
+{
+  transform: translate(0,-40px);
 }
 legend{
   text-align: center;
@@ -70,6 +75,7 @@ fieldset {
   border: none;
 }
 form {
+  padding: 10px;
   border: solid 2px darkblue;
   box-shadow: 0px 0px 10px darkblue;
   background-color: rgba(0, 0, 0, 0.7);
@@ -82,8 +88,8 @@ form {
 }
 input[type="text"],
 input[type="password"] {
-  margin-top: 16px;
-  font-size: 16px;
+  margin-top: 18px;
+  font-size: 18px;
   cursor: none;
   border: none;
   border-bottom: 1px solid darkblue;
@@ -108,4 +114,3 @@ input[type="button"]:hover {
   outline: none;
 }
 </style>
-
