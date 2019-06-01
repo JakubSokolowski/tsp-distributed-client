@@ -7,9 +7,7 @@
         <p>Typ algorytmu: {{Problem.algorithm}}</p>
         <div>
           Macierz:
-          <p v-for="(Row,index) in Problem.graph.costMatrix" :key="'Row'+index">
-            <span v-for="(City,index) in Row" :key="'Row City' + index">{{City}},</span>
-          </p>
+          <Matrix :matrix="Problem.graph.costMatrix"/>
         </div>
         <div v-if="Problem.tour != null">
           Wynik:
@@ -33,6 +31,7 @@
 </template>
 
 <script>
+import Matrix from "@/components/Matrix.vue"
 import Menu from "@/components/Menu.vue";
 import DataAccess from "@/components/DataAccess.js";
 import RoundProgressBar from "@/components/RoundProgressBar.vue";
@@ -40,7 +39,8 @@ export default {
   name: "EditDataOfUser",
   components: {
     Menu,
-    RoundProgressBar
+    RoundProgressBar,
+    Matrix
   },
   mounted() {
     this.getData();
