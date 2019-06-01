@@ -3,6 +3,7 @@
     <div v-if="isLoged" class="Menu">
       <router-link class="itemMenu" to="/przeslijPlik">Prześlij plik</router-link>
       <router-link class="itemMenu" to="/problemy">Instancje problemów</router-link>
+      <router-link class="itemMenu" to="/panel">Panel administracyjny</router-link>
       <router-link class="itemMenu" to="/edytujDane">Edytuj dane</router-link>
       <router-link class="itemMenu" to="/wyloguj">Wyloguj</router-link>
     </div>

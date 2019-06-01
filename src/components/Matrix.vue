@@ -45,6 +45,7 @@ table{
 td,th{
   border: 1px black solid;
   padding: 1px;
+  text-align: right;
 }
 h1{
   font-size: 32px;

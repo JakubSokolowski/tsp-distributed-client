@@ -8,6 +8,7 @@ import UserIsLogin from "./UserIsLogin.vue";
 import UserIsLogout from "./UserIsLogout.vue";
 import EditDataOfUser from "./EditDataOfUser.vue";
 import RegistrationUser from "./RegistrationUser.vue";
+import AdministratorPanel from "./AdministratorPanel.vue";
 import Problems from "./Problems.vue";
 import FileUpload from "./FileUpload.vue"
 import { store } from "./store.js"
@@ -55,6 +56,15 @@ const routes = [
     path: "/problemy", get component() {
       if (store.getters.isLoged == true) {
         return Problems;
+      } else {
+        return NotAccess;
+      }
+    }
+  },
+  {
+    path: "/panel", get component() {
+      if (store.getters.isLoged == true) {
+        return AdministratorPanel;
       } else {
         return NotAccess;
       }
