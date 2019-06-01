@@ -11,11 +11,11 @@
       <div>
         <input type="button" @click="register" value="Rejestruj">
       </div>
-      <p
+    </form>
+    <p
         v-for="(Comunicat,index) in comunicats"
         v-bind:key="'RegistrationByCustomer'+ index + Comunicat"
       >{{Comunicat}}</p>
-    </form>
   </div>
 </template>
 

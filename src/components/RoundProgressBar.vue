@@ -99,7 +99,5 @@ export default {
   background-color: rgba(0, 0, 0, 0);
   width: 49vw;
   height: 49vw;
-  margin-right: auto;
-  margin-right: auto;
 }
 </style>
