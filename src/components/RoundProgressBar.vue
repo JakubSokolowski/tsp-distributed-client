@@ -97,7 +97,7 @@ export default {
 .progressCircleBar {
   border-radius: 50%;
   background-color: rgba(0, 0, 0, 0);
-  width: 100vw;
-  height: 100vw;
+  width: 100vh;
+  height: 100vh;
 }
 </style>
