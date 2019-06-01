@@ -94,6 +94,7 @@ h1 {
   width: 70%;
   margin-left: auto;
   margin-right: auto;
+  padding-left: 5px;
 }
 </style>
 

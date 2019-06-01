@@ -3,9 +3,9 @@
     <Menu/>
     <div class="Content">
       <form enctype="multipart/form-data">
-        <p>Prześlij plik</p>
-        <div>Wybierz plik do przesłania:</div>
-        <div>
+        <fieldset>
+          <legend>Prześlij plik</legend>
+          <label for="file">Wybierz plik do przesłania:</label>
           <input
             accept=".tsp, .atsp, .xml"
             type="file"
@@ -13,10 +13,8 @@
             ref="file"
             @change="handleFileUpload()"
           >
-        </div>
-        <div>
           <input type="button" value="Wyślij" @click="submitFile">
-        </div>
+        </fieldset>
       </form>
     </div>
   </div>
@@ -50,13 +48,13 @@ export default {
       axios
         .post(url, formData, {
           headers: {
-            "Content-Type": "multipart/form-data",
+            "Content-Type": "multipart/form-data"
           },
           params: null,
           auth: {
-              username: this.$store.getters.username,
-              password: this.$store.getters.password
-            }
+            username: this.$store.getters.username,
+            password: this.$store.getters.password
+          }
         })
         .then(function() {
           console.log("Submit succesfully!");
@@ -89,6 +87,18 @@ export default {
 </script>
 
 <style scoped>
+form{
+  border: solid 2px darkblue;
+  box-shadow: 0px 0px 10px darkblue;
+  background-color: rgba(0,0,0,0.7);
+  color: blue;
+  width: 70%;
+  margin-left:auto; 
+  margin-right:auto;
+}
+form fieldset{
+  border: none;
+}
 .Content {
   padding: 5px;
 }
