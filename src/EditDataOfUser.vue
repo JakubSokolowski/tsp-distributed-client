@@ -3,24 +3,18 @@
     <Menu/>
     <form>
       <fieldset>
-      <legend>Zmiana hasła</legend>
-      <div>
-        Stare hasło:
-        <input id="password" type="password" v-model="oldPassword">
-      </div>
-      <div>
-        Nowe hasło:
-        <input type="password" v-model="newPassword">
-      </div>
-      <div>
+        <legend>Zmiana hasła</legend>
+        <input id="oldPassword" type="password" v-model="oldPassword">
+        <label for="oldPassword">Stare hasło:</label>
+        <input id="newPassword" type="password" v-model="newPassword">
+        <label for="newPassword">Nowe hasło:</label>
         <input type="button" value="Edytuj hasło" @click="changePassword">
-      </div>
       </fieldset>
     </form>
     <p
-        v-for="(Comunicat,index) in comunicats"
-        v-bind:key="'EditDataByEmployee'+ index + Comunicat"
-      >{{Comunicat}}</p>
+      v-for="(Comunicat,index) in comunicats"
+      v-bind:key="'EditDataByEmployee'+ index + Comunicat"
+    >{{Comunicat}}</p>
   </div>
 </template>
 
@@ -32,9 +26,7 @@ export default {
   components: {
     Menu
   },
-  mounted() {
-    
-  },
+  mounted() {},
   data: function() {
     return {
       oldPassword: "",
@@ -48,7 +40,7 @@ export default {
         .then(response => {
           this.comunicats = [];
           this.comunicats.push(response.data);
-          this.$store.dispatch('changePassword',this.newPassword);
+          this.$store.dispatch("changePassword", this.newPassword);
         })
         .catch(error => {
           this.comunicats = [];
@@ -63,39 +55,56 @@ export default {
 
 
 <style scoped>
-fieldset{
+label{
+  position: absolute;
+  transform: translate(0,-16px);
+}
+input:focus[type="text"] + label,input:focus[type="password"] + label{
+  transform: translate(0,-32px);
+  color: cornflowerblue;
+}
+legend{
+  text-align: center;
+}
+fieldset {
   border: none;
 }
-form{
+form {
   border: solid 2px darkblue;
   box-shadow: 0px 0px 10px darkblue;
-  background-color: rgba(0,0,0,0.7);
+  background-color: rgba(0, 0, 0, 0.7);
   color: blue;
   width: 30%;
-  margin-left:auto; 
-  margin-right:auto;
+  margin-left: auto;
+  margin-right: auto;
   margin-top: 10px;
   margin-bottom: 10px;
-  padding: 10px;
 }
-input[type="text"],input[type="password"]{
+input[type="text"],
+input[type="password"] {
+  margin-top: 16px;
+  font-size: 16px;
+  cursor: none;
   border: none;
   border-bottom: 1px solid darkblue;
   background: transparent;
   width: 100%;
   color: white;
 }
-input[type="button"]
-{
+input[type="button"] {
   margin-top: 10px;
   display: block;
   width: 70%;
   margin-left: auto;
   margin-right: auto;
-  background-color: rgba(0,0,255,0.7);
+  background-color: rgba(0, 0, 255, 0.7);
+  color: black;
   border: none;
 }
-*{
+input[type="button"]:hover {
+  color: cornflowerblue;
+}
+* {
   outline: none;
 }
 </style>
