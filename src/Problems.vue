@@ -29,7 +29,7 @@
             </p>
           </div>
           <h1>Postęp rozwiązywania: {{Problem.percentageOfProgress}}%</h1>
-          <RoundProgressBar :progres="Problem.percentageOfProgress" :tour="Problem.tour"/>
+          <RoundProgressBar class="progress" :progres="Problem.percentageOfProgress" :tour="Problem.tour"/>
         </div>
       </div>
     </div>
@@ -95,6 +95,10 @@ h1 {
   margin-left: auto;
   margin-right: auto;
   padding-left: 5px;
+}
+.progress{
+  margin-right: auto;
+  margin-left: auto;
 }
 </style>
 
