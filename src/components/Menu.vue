@@ -31,13 +31,11 @@ export default {
 
 <style scoped>
 .itemMenu {
-  background-color: green;
   text-align: center;
-  border-style: none solid none solid;
-  border-color: darkgreen;
-  color: white;
   display: block;
   text-decoration: none;
+  color: blue;
+  padding: 5px;
 }
 .itemMenu:hover {
   padding-top: 5vh;
@@ -47,11 +45,12 @@ export default {
   width: 100vw;
   height: 5vh;
   position: fixed;
-  background-color: green;
+  background-color: rgba(0,0,0,0.7);
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 1.5vh;
+  border-bottom: 1px darkblue solid;
 }
 .GapBar {
   width: 100vw;
