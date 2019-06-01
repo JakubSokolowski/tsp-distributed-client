@@ -59,6 +59,7 @@ input[type="text"],input[type="password"]{
   border-bottom: 1px solid darkblue;
   background: transparent;
   width: 100%;
+  color: white;
 }
 input[type="button"]
 {
