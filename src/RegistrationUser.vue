@@ -90,6 +90,8 @@ input[type="button"]
   width: 70%;
   margin-left: auto;
   margin-right: auto;
+  background-color: rgba(0,0,255,0.7);
+  border: none;
 }
 *{
   outline: none;
