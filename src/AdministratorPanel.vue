@@ -46,7 +46,7 @@ export default {
   },
   methods: {
     getData() {
-      DataAccess.getProblems().then(response => {
+      DataAccess.getProblemsForAdmin().then(response => {
         this.problems = response.data;
         console.log(this.problems);
       });

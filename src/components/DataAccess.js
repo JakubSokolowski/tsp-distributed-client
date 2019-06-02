@@ -55,6 +55,20 @@ var DataAccess = {
             return response;
         });
     },
+    getProblemsForAdmin() {
+        return axios.get(
+            "http://" + this.adresIPPort + "/myapp/Problems/All",
+            {
+                params: null,
+                auth: {
+                    username: store.getters.username,
+                    password: store.getters.password 
+                }
+            }
+        ).then(response => {
+            return response;
+        });
+    },
     //na razie przesyłanie jest bezpośrednio w komponencie FileUpload
     sendFile(file) {
 
