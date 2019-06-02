@@ -15,7 +15,7 @@ export const store = new Vuex.Store({
             username: "Mateusz",
             password: "Krol"
         },
-        isLoged: false
+        role: "UNREGISTER"
     },
     getters: {
         username(state) {
@@ -27,14 +27,14 @@ export const store = new Vuex.Store({
         user(state) {
             return state.user;
         },
-        isLoged(state) {
-            return state.isLoged;
+        role(state) {
+            return state.role;
         }
     },
     mutations: {
-        setLoged(state,isLoged)
+        setRole(state,role)
         {
-            state.isLoged = isLoged;
+            state.role = role;
         },
         login(state, user) {
             state.user.username = user.username;
@@ -44,7 +44,7 @@ export const store = new Vuex.Store({
         logout(state) {
             state.user.username = " ";
             state.user.password = " ";
-            state.isLoged = false;
+            state.role = "UNREGISTER";
         },
         changePassword(state,password) {
             state.user.password = password;
@@ -57,7 +57,7 @@ export const store = new Vuex.Store({
                 console.log(data);
                 if (data != null) {
                     context.commit("login", user);
-                    context.commit("setLoged", data);
+                    context.commit("setRole", data);
                     return data;
                 }
             });

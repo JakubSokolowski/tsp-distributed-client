@@ -1,13 +1,17 @@
 <template>
   <div id="app">
-    <div v-if="isLoged" class="Menu">
+    <div v-if="role === 'USER'" class="Menu">
       <router-link class="itemMenu" to="/przeslijPlik">Prześlij plik</router-link>
       <router-link class="itemMenu" to="/problemy">Instancje problemów</router-link>
+      <router-link class="itemMenu" to="/edytujDane">Edytuj dane</router-link>
+      <router-link class="itemMenu" to="/wyloguj">Wyloguj</router-link>
+    </div>
+    <div v-if="role === 'ADMIN'" class="Menu">
       <router-link class="itemMenu" to="/panel">Panel administracyjny</router-link>
       <router-link class="itemMenu" to="/edytujDane">Edytuj dane</router-link>
       <router-link class="itemMenu" to="/wyloguj">Wyloguj</router-link>
     </div>
-    <div v-if="!isLoged" id="menuForEmployee" class="Menu">
+    <div v-if="role === 'UNREGISTER'" id="menuForEmployee" class="Menu">
       \<router-link class="itemMenu" to="/rejestracja">Rejestracja</router-link>
       <router-link class="itemMenu" to="/login">Zaloguj</router-link>
     </div>
@@ -22,8 +26,8 @@ export default {
     username() {
       return this.$store.getters.username;
     },
-    isLoged() {
-      return this.$store.getters.isLoged;
+    role() {
+      return this.$store.getters.role;
     }
   }
 };

@@ -18,7 +18,7 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/login", get component() {
-      if (store.getters.isLoged != true) {
+      if (store.getters.role === "UNREGISTER") {
         return Login;
       } else {
         return UserIsLogin;
@@ -27,7 +27,7 @@ const routes = [
   },
   {
     path: "/wyloguj", get component() {
-      if (store.getters.isLoged != true) {
+      if (store.getters.role === "UNREGISTER") {
         return UserIsLogout;
       } else {
         return Logout;
@@ -36,25 +36,29 @@ const routes = [
   },
   {
     path: "/", get component() {
-      if (store.getters.isLoged == true) {
-        return EditDataOfUser;
-      } else {
-        return NotAccess;
+      if (store.getters.role === "ADMIN") {
+        return AdministratorPanel;
+      }else if(store.getters.role === "USER")
+      {
+        return Problems;
+      }
+      else {
+        return Login;
       }
     }
   },
   {
     path: "/edytujDane", get component() {
-      if (store.getters.isLoged == true) {
-        return EditDataOfUser;
-      } else {
+      if (store.getters.role === "UNREGISTER") {
         return NotAccess;
+      } else {
+        return EditDataOfUser;
       }
     }
   },
   {
     path: "/problemy", get component() {
-      if (store.getters.isLoged == true) {
+      if (store.getters.role === "USER") {
         return Problems;
       } else {
         return NotAccess;
@@ -63,7 +67,7 @@ const routes = [
   },
   {
     path: "/panel", get component() {
-      if (store.getters.isLoged == true) {
+      if (store.getters.role === "ADMIN") {
         return AdministratorPanel;
       } else {
         return NotAccess;
@@ -72,7 +76,7 @@ const routes = [
   },
   {
     path: "/przeslijPlik", get component() {
-      if (store.getters.isLoged == true) {
+      if (store.getters.role === "USER") {
         return FileUpload;
       } else {
         return NotAccess;
@@ -81,7 +85,7 @@ const routes = [
   },
   {
     path: "/rejestracja", get component() {
-      if (store.getters.isLoged == true) {
+      if (store.getters.role === "UNREGISTER") {
         return NotAccess;
       } else {
         return RegistrationUser;

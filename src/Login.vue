@@ -30,7 +30,7 @@ export default {
   },
   methods: {
       login(){
-        this.$store.dispatch('login',this.user).then( () => {
+        this.$store.dispatch('login',this.user).then( (response) => {
             this.$router.go();
         }).catch(error => {
 
