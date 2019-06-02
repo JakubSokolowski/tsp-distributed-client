@@ -7,8 +7,8 @@
         <input id="nickname" type="password" v-model="user.password" required>
         <label for="nickname">Hasło:</label>
         <input type="button" @click="login" value="Zaloguj"/>
-      
     </form>
+    
   </div>
 </template>
 

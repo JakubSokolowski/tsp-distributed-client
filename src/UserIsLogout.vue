@@ -1,7 +1,7 @@
 <template>
   <div>
     <Menu/>
-    Nie jesteś zalogowany!
+    <div class="Content">Nie jesteś zalogowany!</div>
   </div>
 </template>
 
@@ -18,7 +18,15 @@ export default {
 
 <style scoped>
 .Content {
-  padding: 5px;
+  margin-top: 10px;
+  padding: 10px;
+  border: solid 2px darkblue;
+  box-shadow: 0px 0px 10px darkblue;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: blue;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>
 
