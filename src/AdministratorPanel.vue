@@ -48,7 +48,6 @@ export default {
     getData() {
       DataAccess.getProblemsForAdmin().then(response => {
         this.problems = response.data;
-        console.log(this.problems);
       });
       this.prog += 1;
     }

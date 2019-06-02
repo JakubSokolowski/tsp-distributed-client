@@ -17,6 +17,14 @@
         </fieldset>
       </form>
     </div>
+    <div v-if="comunicats.length > 0" class="Content">
+      <div class="Comunicats">
+        <p
+          v-for="(Comunicat,index) in comunicats"
+          v-bind:key="'AdministratorPanel'+ index + Comunicat"
+        >{{Comunicat}}</p>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -44,7 +52,7 @@ export default {
       let formData = new FormData();
       const url = `http://localhost:8086/myapp/Files`;
       formData.append("file", this.file);
-
+      let comunicats = this.comunicats;
       axios
         .post(url, formData, {
           headers: {
@@ -57,55 +65,45 @@ export default {
           }
         })
         .then(function() {
-          console.log("Submit succesfully!");
+          while (comunicats.length > 0) comunicats.pop();
+          comunicats.push("Plik wysłany poprawnie!");
         })
         .catch(function() {
-          console.log("Submit failed!");
+          while (comunicats.length > 0) comunicats.pop();
+          comunicats.push("Plik nie wysłany!");
         });
     },
 
     handleFileUpload() {
       this.file = this.$refs.file.files[0];
     }
-  },
-  //na razie w wersji powyższej
-  sendFile() {
-    let formData = new FormData();
-    DataAccess.sendFile(formData)
-      .then(response => {
-        this.comunicats = [];
-        this.comunicats.push(response.data);
-      })
-      .catch(error => {
-        this.comunicats = [];
-        for (var propName in error.response.data) {
-          this.comunicats.push(error.response.data[propName]);
-        }
-      });
   }
 };
 </script>
 
 <style scoped>
-form{
+form {
   border: solid 2px darkblue;
   box-shadow: 0px 0px 10px darkblue;
-  background-color: rgba(0,0,0,0.7);
+  background-color: rgba(0, 0, 0, 0.7);
   color: blue;
   width: 70%;
-  margin-left:auto; 
-  margin-right:auto;
+  margin-left: auto;
+  margin-right: auto;
 }
-form fieldset{
+form fieldset {
   border: none;
 }
 .Content {
   padding: 5px;
 }
-.Content p {
-  display: block;
-  border-style: none none solid none;
-  border-bottom-color: darkgreen;
-  color: darkgreen;
+.Comunicats {
+  border: solid 2px darkblue;
+  box-shadow: 0px 0px 10px darkblue;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: blue;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>
