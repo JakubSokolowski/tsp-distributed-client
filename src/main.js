@@ -86,9 +86,9 @@ const routes = [
   {
     path: "/rejestracja", get component() {
       if (store.getters.role === "UNREGISTER") {
-        return NotAccess;
-      } else {
         return RegistrationUser;
+      } else {
+        return NotAccess;
       }
     }
   }

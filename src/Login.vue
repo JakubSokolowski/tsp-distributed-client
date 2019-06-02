@@ -2,19 +2,26 @@
   <div>
     <Menu/>
     <form>
-        <input id="username" type="text" v-model="user.username" required>
-        <label for="username">Login:</label>
-        <input id="nickname" type="password" v-model="user.password" required>
-        <label for="nickname">Hasło:</label>
-        <input type="button" @click="login" value="Zaloguj"/>
+      <input id="username" type="text" v-model="user.username" required>
+      <label for="username">Login:</label>
+      <input id="nickname" type="password" v-model="user.password" required>
+      <label for="nickname">Hasło:</label>
+      <input type="button" @click="login" value="Zaloguj">
     </form>
-    
+    <div v-if="comunicats.length > 0" class="Content">
+      <div class="Comunicats">
+        <p
+          v-for="(Comunicat,index) in comunicats"
+          v-bind:key="'AdministratorPanel'+ index + Comunicat"
+        >{{Comunicat}}</p>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import Menu from "@/components/Menu.vue";
-import { error } from 'util';
+import { error } from "util";
 export default {
   name: "Logowanie",
   components: {
@@ -25,37 +32,42 @@ export default {
       user: {
         username: "",
         password: ""
-      }
+      },
+      comunicats: []
     };
   },
   methods: {
-      login(){
-        this.$store.dispatch('login',this.user).then( (response) => {
-            this.$router.go();
-        }).catch(error => {
-
+    login() {
+      this.$store
+        .dispatch("login", this.user)
+        .then(response => {
+          this.$router.go();
+          this.comunicats = [];
+          this.comunicats.push("Udało się zalogować!");
+        })
+        .catch(error => {
+          this.comunicats = [];
+          this.comunicats.push("Nie udało się zalogować!");
         });
-      }
+    }
   }
 };
 </script>
 
 
 <style scoped>
-label{
+label {
   position: absolute;
-  transform: translate(0,-16px);
+  transform: translate(0, -16px);
 }
-input:focus + label
-{
-  transform: translate(0,-40px);
+input:focus + label {
+  transform: translate(0, -40px);
   color: cornflowerblue;
 }
-input:valid + label
-{
-  transform: translate(0,-40px);
+input:valid + label {
+  transform: translate(0, -40px);
 }
-legend{
+legend {
   text-align: center;
 }
 fieldset {
@@ -99,6 +111,18 @@ input[type="button"]:hover {
 }
 * {
   outline: none;
+}
+.Comunicats {
+  border: solid 2px darkblue;
+  box-shadow: 0px 0px 10px darkblue;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: blue;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.Content {
+  padding: 5px;
 }
 </style>
 
