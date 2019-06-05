@@ -53,7 +53,6 @@ export default {
           this.comunicats = [];
           this.comunicats.push("Nie udało się zalogować!");
         });
-        
     }
   }
 };

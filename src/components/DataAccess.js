@@ -32,6 +32,62 @@ var DataAccess = {
             }
         );
     },
+    upProblem(id) {
+        let ProblemInstanceId = {
+            'id' : id
+        }
+        return axios.post(
+            "http://" + this.adresIPPort + "/myapp/Queue/Up", ProblemInstanceId, {
+                params: null,
+                auth: {
+                    username: 'admin',
+                    password: 'admin'
+                }
+            }
+        );
+    },
+    downProblem(id) {
+        let ProblemInstanceId = {
+            'id' : id
+        }
+        return axios.post(
+            "http://" + this.adresIPPort + "/myapp/Queue/Down", ProblemInstanceId, {
+                params: null,
+                auth: {
+                    username: 'admin',
+                    password: 'admin'
+                }
+            }
+        );
+    },
+    startProblem(id) {
+        let ProblemInstanceId = {
+            'id' : id
+        }
+        return axios.post(
+            "http://" + this.adresIPPort + "/myapp/Queue/Start", ProblemInstanceId, {
+                params: null,
+                auth: {
+                    username: store.getters.username,
+                    password: store.getters.password
+                }
+            }
+        );
+    },
+    stopProblem(id) {
+        let ProblemInstanceId = {
+            'id' : id
+        }
+        return axios.post(
+            "http://" + this.adresIPPort + "/myapp/Queue/Stop", ProblemInstanceId ,{
+                params: null,
+                auth: {
+                    username: store.getters.username,
+                    password: store.getters.password
+                }
+            }
+        );
+    },
     addUser(user) {
         return axios.post(
             "http://" + this.adresIPPort + "/myapp/Uzytkownicy", user

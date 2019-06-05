@@ -4,8 +4,8 @@
 
     <div v-for="Problem in problems" class="container" :key="'Problem' + Problem.id">
         <div class="sideBar">
-            <input type="button" class="elementLeftBar upArrow" value="▶️">
-            <input type="button" class="elementLeftBar downArrow" value="▶️">
+            <input type="button" class="elementLeftBar upArrow" value="▶️" @click="upProblem(Problem.id)">
+            <input type="button" class="elementLeftBar downArrow" value="▶️" @click="downProblem(Problem.id)">
         </div>
         <div class="mainContent">
             <p>Zlecający: {{Problem.user.username}} Data zlecenia: {{Problem.dateOfOrdering}}</p>
@@ -14,8 +14,8 @@
             
         </div>
         <div v-if="Problem.percentageOfProgress < 100" class="sideBar">
-            <input type="button" v-if="!Problem.solving" class="element greenColor" value="▶️">
-            <input type="button" v-if="Problem.solving" class="element greenColor" value="||">
+            <input type="button" v-if="!Problem.solving" class="element greenColor" value="▶️" @click="startProblem(Problem.id)">
+            <input type="button" v-if="Problem.solving" class="element greenColor" value="||" @click="stopProblem(Problem.id)">
             <input type="button" class="element redColor" value="X">
         </div>
     </div>
@@ -50,7 +50,19 @@ export default {
         this.problems = response.data;
       });
       this.prog += 1;
-    }
+    },
+    upProblem(problem) {
+        DataAccess.upProblem(problem);
+    },
+    downProblem(problem) {
+        DataAccess.downProblem(problem);
+    },
+    startProblem(problem) {
+        DataAccess.startProblem(problem);
+    },
+    stopProblem(problem) {
+        DataAccess.stopProblem(problem);
+    },
   },
   beforeDestroy() {
     clearInterval(this.timer);
