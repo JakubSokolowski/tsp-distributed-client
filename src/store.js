@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
-import DataAccess from "@/components/DataAccess.js"
+
 
 Vue.use(Vuex);
 
@@ -12,10 +12,10 @@ export const store = new Vuex.Store({
     ],
     state: {
         user: {
-            username: "Mateusz",
-            password: "Krol"
+            username: "",
+            password: ""
         },
-        isLoged: false
+        role: "UNREGISTER"
     },
     getters: {
         username(state) {
@@ -27,44 +27,39 @@ export const store = new Vuex.Store({
         user(state) {
             return state.user;
         },
-        isLoged(state) {
-            return state.isLoged;
+        role(state) {
+            return state.role;
         }
     },
     mutations: {
-        setLoged(state,isLoged)
-        {
-            state.isLoged = isLoged;
+        setRole(state, role) {
+            console.log(role);
+            state.role = role;
         },
         login(state, user) {
+            console.log(user);
             state.user.username = user.username;
             state.user.password = user.password;
-            state.user.isLoged = true;
         },
         logout(state) {
             state.user.username = " ";
             state.user.password = " ";
-            state.isLoged = false;
+            state.role = "UNREGISTER";
         },
-        changePassword(state,password) {
+        changePassword(state, password) {
             state.user.password = password;
         }
     },
     actions: {
-        login(context, user) {
-            return DataAccess.login(user).then(data => {
-                // eslint-disable-next-line no-console
-                console.log(data);
-                if (data != null) {
-                    context.commit("login", user);
-                    context.commit("setLoged", data);
-                    return data;
-                }
-            });
+        loginAction(context, user) {
+            context.commit("login", user);
+        },
+        setRoleAction(context, role) {
+            context.commit("setRole", role);
         },
         changePassword(context, newPassword) {
             context.commit("changePassword", newPassword);
-              
+
         }
     }
 })

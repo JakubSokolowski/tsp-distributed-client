@@ -1,12 +1,17 @@
 <template>
   <div id="app">
-    <div v-if="isLoged" class="Menu">
+    <div v-if="role === 'USER'" class="Menu">
       <router-link class="itemMenu" to="/przeslijPlik">Prześlij plik</router-link>
       <router-link class="itemMenu" to="/problemy">Instancje problemów</router-link>
       <router-link class="itemMenu" to="/edytujDane">Edytuj dane</router-link>
       <router-link class="itemMenu" to="/wyloguj">Wyloguj</router-link>
     </div>
-    <div v-if="!isLoged" id="menuForEmployee" class="Menu">
+    <div v-if="role === 'ADMIN'" class="Menu">
+      <router-link class="itemMenu" to="/panel">Panel administracyjny</router-link>
+      <router-link class="itemMenu" to="/edytujDane">Edytuj dane</router-link>
+      <router-link class="itemMenu" to="/wyloguj">Wyloguj</router-link>
+    </div>
+    <div v-if="role === 'UNREGISTER'" id="menuForEmployee" class="Menu">
       \<router-link class="itemMenu" to="/rejestracja">Rejestracja</router-link>
       <router-link class="itemMenu" to="/login">Zaloguj</router-link>
     </div>
@@ -21,8 +26,8 @@ export default {
     username() {
       return this.$store.getters.username;
     },
-    isLoged() {
-      return this.$store.getters.isLoged;
+    role() {
+      return this.$store.getters.role;
     }
   }
 };
@@ -31,13 +36,11 @@ export default {
 
 <style scoped>
 .itemMenu {
-  background-color: green;
   text-align: center;
-  border-style: none solid none solid;
-  border-color: darkgreen;
-  color: white;
   display: block;
   text-decoration: none;
+  color: blue;
+  padding: 5px;
 }
 .itemMenu:hover {
   padding-top: 5vh;
@@ -47,11 +50,12 @@ export default {
   width: 100vw;
   height: 5vh;
   position: fixed;
-  background-color: green;
+  background-color: rgba(0,0,0,0.7);
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 1.5vh;
+  border-bottom: 1px darkblue solid;
 }
 .GapBar {
   width: 100vw;

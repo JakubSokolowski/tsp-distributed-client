@@ -13,9 +13,7 @@ var DataAccess = {
                     password: user.password
                 }
             }
-        ).then(response => {
-            return response.data;
-        });
+        );
     },
     updatePassword(oldPassword, newPassword) {
         var user = {
@@ -44,6 +42,20 @@ var DataAccess = {
     getProblems() {
         return axios.get(
             "http://" + this.adresIPPort + "/myapp/Problems",
+            {
+                params: null,
+                auth: {
+                    username: store.getters.username,
+                    password: store.getters.password 
+                }
+            }
+        ).then(response => {
+            return response;
+        });
+    },
+    getProblemsForAdmin() {
+        return axios.get(
+            "http://" + this.adresIPPort + "/myapp/Problems/All",
             {
                 params: null,
                 auth: {

@@ -1,30 +1,35 @@
 <template>
   <div>
     <Menu/>
-    <div class="Content">
+    <div>
       <div v-for="Problem in problems" :key="Problem.id">
-        <p>Data zlecenia: {{Problem.dateOfOrdering}}</p>
-        <p>Typ algorytmu: {{Problem.algorithm}}</p>
-        <div>
-          Macierz:
-          <p v-for="(Row,index) in Problem.graph.costMatrix" :key="'Row'+index">
-            <span v-for="(City,index) in Row" :key="'Row City' + index">{{City}},</span>
-          </p>
+        <div class="Content">
+          <h1>Info</h1>
+          <div class="containerItem">
+            <p>Data zlecenia: {{Problem.dateOfOrdering}}</p>
+            <p>Typ algorytmu: {{Problem.algorithm}}</p>
+          </div>
         </div>
+
+        <Matrix :matrix="Problem.graph.costMatrix"/>
+
         <div v-if="Problem.tour != null">
-          Wynik:
-          <p>Koszt: {{Problem.cost}}</p>
-          <p>
-            Trasa:
-            <span
-              v-for="(City,index) in Problem.tour"
-              :key="'tour:' + Problem.id + 'City:' +index"
-            >
-              <span v-if="index != 0">->{{City}}</span>
-              <span v-else>{{City}}</span>
-            </span>
-          </p>
-          Postęp rozwiązywania: {{Problem.percentageOfProgress}}%
+          <h1>Wynik</h1>
+          <div class="containerItem">
+            <p>Koszt: {{Problem.cost}}</p>
+            <p>
+              Trasa:
+              <span
+                v-for="(City,index) in Problem.tour"
+                :key="'tour:' + Problem.id + 'City:' +index"
+              >
+                <span v-if="index != 0">->{{City}}</span>
+                <span v-else>{{City}}</span>
+              </span>
+            </p>
+          </div>
+          <h1>Postęp rozwiązywania: {{Problem.percentageOfProgress}}%</h1>
+          <RoundProgressBar class="progress" :progres="Problem.percentageOfProgress" :tour="Problem.tour"/>
         </div>
       </div>
     </div>
@@ -32,12 +37,16 @@
 </template>
 
 <script>
+import Matrix from "@/components/Matrix.vue";
 import Menu from "@/components/Menu.vue";
 import DataAccess from "@/components/DataAccess.js";
+import RoundProgressBar from "@/components/RoundProgressBar.vue";
 export default {
   name: "EditDataOfUser",
   components: {
-    Menu
+    Menu,
+    RoundProgressBar,
+    Matrix
   },
   mounted() {
     this.getData();
@@ -48,7 +57,8 @@ export default {
     return {
       problems: [],
       comunicats: [],
-      timer: ""
+      timer: "",
+      prog: 10
     };
   },
   methods: {
@@ -56,6 +66,7 @@ export default {
       DataAccess.getProblems().then(response => {
         this.problems = response.data;
       });
+      this.prog += 1;
     }
   },
   beforeDestroy() {
@@ -66,8 +77,28 @@ export default {
 
 
 <style scoped>
+h1 {
+  font-size: 32px;
+  color: blue;
+  text-align: center;
+}
 .Content {
-  padding: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.containerItem {
+  border: solid 2px darkblue;
+  box-shadow: 0px 0px 10px darkblue;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: blue;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 5px;
+}
+.progress{
+  margin-right: auto;
+  margin-left: auto;
 }
 </style>
 
