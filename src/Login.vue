@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import DataAccess from "@/components/DataAccess.js"
 import Menu from "@/components/Menu.vue";
 import { error } from "util";
 export default {
@@ -38,17 +39,22 @@ export default {
   },
   methods: {
     login() {
-      this.$store
-        .dispatch("login", this.user)
+      DataAccess.login(this.user)
         .then(response => {
-          this.$router.go();
-          this.comunicats = [];
-          this.comunicats.push("Udało się zalogować!");
-        })
+          console.log(response.data);
+          
+            this.$store.dispatch("loginAction", this.user);
+            this.$store.dispatch("setRoleAction", response.data);
+            this.comunicats = [];
+            this.comunicats.push("Udało się zalogować!");
+            this.$router.go();
+        });
+        /*
         .catch(error => {
           this.comunicats = [];
           this.comunicats.push("Nie udało się zalogować!");
         });
+        */
     }
   }
 };

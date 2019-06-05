@@ -13,9 +13,7 @@ var DataAccess = {
                     password: user.password
                 }
             }
-        ).then(response => {
-            return response.data;
-        });
+        );
     },
     updatePassword(oldPassword, newPassword) {
         var user = {
