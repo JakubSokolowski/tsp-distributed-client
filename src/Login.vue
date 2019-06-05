@@ -48,13 +48,12 @@ export default {
             this.comunicats = [];
             this.comunicats.push("Udało się zalogować!");
             this.$router.go();
-        });
-        /*
+        })
         .catch(error => {
           this.comunicats = [];
           this.comunicats.push("Nie udało się zalogować!");
         });
-        */
+        
     }
   }
 };
