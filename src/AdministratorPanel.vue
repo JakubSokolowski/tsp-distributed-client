@@ -16,7 +16,7 @@
         <div v-if="Problem.percentageOfProgress < 100" class="sideBar">
             <input type="button" v-if="!Problem.solving" class="element greenColor" value="▶️" @click="startProblem(Problem.id)">
             <input type="button" v-if="Problem.solving" class="element greenColor" value="||" @click="stopProblem(Problem.id)">
-            <input type="button" class="element redColor" value="X">
+            <input type="button" class="element redColor" value="X" @click="deleteProblem(Problem.id)">
         </div>
     </div>
   </div>
@@ -66,6 +66,9 @@ export default {
     stopProblem(problem) {
         DataAccess.stopProblem(problem);
     },
+    deleteProblem(problem) {
+        DataAccess.deleteProblem(problem);
+    }
   },
   beforeDestroy() {
     clearInterval(this.timer);

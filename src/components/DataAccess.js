@@ -88,6 +88,20 @@ var DataAccess = {
             }
         );
     },
+    deleteProblem(id) {
+        let ProblemInstanceId = {
+            'id' : id
+        }
+        return axios.post(
+            "http://" + this.adresIPPort + "/myapp/Queue/Delete", ProblemInstanceId ,{
+                params: null,
+                auth: {
+                    username: store.getters.username,
+                    password: store.getters.password
+                }
+            }
+        );
+    },
     addUser(user) {
         return axios.post(
             "http://" + this.adresIPPort + "/myapp/Uzytkownicy", user
