@@ -8,6 +8,7 @@
           <div class="containerItem">
             <p>Data zlecenia: {{Problem.dateOfOrdering}}</p>
             <p>Typ algorytmu: {{Problem.algorithm}}</p>
+            <p>Miejsce w kolejce: {{Problem.indexInQueue}}</p>
           </div>
         </div>
 

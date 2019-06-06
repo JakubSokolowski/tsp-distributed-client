@@ -11,7 +11,7 @@
             <p>Zlecający: {{Problem.user.username}} Data zlecenia: {{Problem.dateOfOrdering}}</p>
             <p>Algorytm: {{Problem.algorithm}} Progres: {{Problem.percentageOfProgress}}%</p>
             <p>Ilość miast: {{Problem.graph.numOfCities}}</p>
-            
+            <p>Miejsce w kolejce: {{Problem.indexInQueue}}</p>
         </div>
         <div v-if="Problem.percentageOfProgress < 100" class="sideBar">
             <input type="button" v-if="!Problem.solving" class="element greenColor" value="▶️" @click="startProblem(Problem.id)">
