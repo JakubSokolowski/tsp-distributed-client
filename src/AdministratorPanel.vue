@@ -48,6 +48,9 @@ export default {
     getData() {
       DataAccess.getProblemsForAdmin().then(response => {
         this.problems = response.data;
+        this.problems.sort( (a,b) => {
+          return a.indexInQueue - b.indexInQueue;
+        });
       });
       this.prog += 1;
     },
