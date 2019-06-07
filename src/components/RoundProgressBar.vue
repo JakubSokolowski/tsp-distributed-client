@@ -41,28 +41,6 @@ export default {
       context.fill();
 
       for (let i = 0; i < numberOfCircle; i++) {
-        let angle = i * (2*Math.PI) / numberOfCircle;
-        context.moveTo(
-          x + 0.8 * r * Math.cos(angle),
-          y + 0.8 * r * Math.sin(angle)
-        );
-        context.font = "30px Arial";
-        context.fillText(i+1+"", x + 0.8 * r * Math.cos(angle), y + 0.8 * r * Math.sin(angle));
-        context.moveTo(
-          x + 0.8 * r * Math.cos(angle) + 0.1 * r,
-          y + 0.8 * r * Math.sin(angle)
-        );
-        context.arc(
-          x + 0.8 * r * Math.cos(angle),
-          y + 0.8 * r * Math.sin(angle),
-          0.1 * r,
-          0,
-          2*Math.PI
-        );
-        context.stroke();
-      }
-
-      for (let i = 0; i < numberOfCircle; i++) {
         let angleFrom = this.tour[i] * (2*Math.PI) / numberOfCircle;
         let angleTo = this.tour[i+1] * (2*Math.PI) / numberOfCircle;
         let fromX = x + 0.8 * r * Math.cos(angleFrom);
@@ -85,6 +63,32 @@ export default {
         context.lineTo(toX-40*Math.cos(angleOfLine+Math.PI/6),toY-40*Math.sin(angleOfLine+Math.PI/6));
         context.stroke();
       }
+
+      for (let i = 0; i < numberOfCircle; i++) {
+        let angle = i * (2*Math.PI) / numberOfCircle;
+        context.moveTo(
+          x + 0.8 * r * Math.cos(angle),
+          y + 0.8 * r * Math.sin(angle)
+        );
+        context.fillStyle = "Blue";
+        context.font = "30px Arial";
+        context.fillText(i+1+"", x + 0.8 * r * Math.cos(angle), y + 0.8 * r * Math.sin(angle));
+        context.fillStyle = "Blue";
+        context.moveTo(
+          x + 0.8 * r * Math.cos(angle) + 0.1 * r,
+          y + 0.8 * r * Math.sin(angle)
+        );
+        context.arc(
+          x + 0.8 * r * Math.cos(angle),
+          y + 0.8 * r * Math.sin(angle),
+          0.1 * r,
+          0,
+          2*Math.PI
+        );
+        context.stroke();
+      }
+
+      
 
 
     }

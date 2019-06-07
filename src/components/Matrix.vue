@@ -4,7 +4,8 @@
     <table >
       <tr v-for="(table,index) in matrix" :key="'Table ' + index">
           <td v-for="(cost,index) in table" :key="'Cost ' + index">
-              {{cost}}
+              <span v-if="cost != 2147483647">{{cost}}</span>
+              <span v-if="cost == 2147483647">∞</span>
           </td>
       </tr>
     </table> 
