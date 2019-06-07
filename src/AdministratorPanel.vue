@@ -11,12 +11,12 @@
             <p>Zlecający: {{Problem.user.username}} Data zlecenia: {{Problem.dateOfOrdering}}</p>
             <p>Algorytm: {{Problem.algorithm}} Progres: {{Problem.percentageOfProgress}}%</p>
             <p>Ilość miast: {{Problem.graph.numOfCities}}</p>
-            
+            <p>Miejsce w kolejce: {{Problem.indexInQueue}}</p>
         </div>
         <div v-if="Problem.percentageOfProgress < 100" class="sideBar">
             <input type="button" v-if="!Problem.solving" class="element greenColor" value="▶️" @click="startProblem(Problem.id)">
             <input type="button" v-if="Problem.solving" class="element greenColor" value="||" @click="stopProblem(Problem.id)">
-            <input type="button" class="element redColor" value="X">
+            <input type="button" class="element redColor" value="X" @click="deleteProblem(Problem.id)">
         </div>
     </div>
   </div>
@@ -48,6 +48,9 @@ export default {
     getData() {
       DataAccess.getProblemsForAdmin().then(response => {
         this.problems = response.data;
+        this.problems.sort( (a,b) => {
+          return a.indexInQueue - b.indexInQueue;
+        });
       });
       this.prog += 1;
     },
@@ -63,6 +66,9 @@ export default {
     stopProblem(problem) {
         DataAccess.stopProblem(problem);
     },
+    deleteProblem(problem) {
+        DataAccess.deleteProblem(problem);
+    }
   },
   beforeDestroy() {
     clearInterval(this.timer);

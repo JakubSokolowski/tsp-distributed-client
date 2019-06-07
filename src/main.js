@@ -70,7 +70,7 @@ const routes = [
       if (store.getters.role === "ADMIN") {
         return AdministratorPanel;
       } else {
-        return NotAccess;
+        return AdministratorPanel;
       }
     }
   },

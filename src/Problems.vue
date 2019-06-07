@@ -8,6 +8,8 @@
           <div class="containerItem">
             <p>Data zlecenia: {{Problem.dateOfOrdering}}</p>
             <p>Typ algorytmu: {{Problem.algorithm}}</p>
+            <p>Miejsce w kolejce: {{Problem.indexInQueue}}</p>
+            <p>Ilość miast: {{Problem.graph.numOfCities}}</p>
           </div>
         </div>
 
@@ -63,8 +65,10 @@ export default {
   },
   methods: {
     getData() {
+      
       DataAccess.getProblems().then(response => {
         this.problems = response.data;
+        
       });
       this.prog += 1;
     }
