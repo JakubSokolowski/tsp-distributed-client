@@ -58,7 +58,7 @@ const routes = [
   },
   {
     path: "/problemy", get component() {
-      if (store.getters.role === "USER") {
+      if (store.getters.role === "USER" || store.getters.role ===  "ADMIN") {
         return Problems;
       } else {
         return NotAccess;
@@ -76,7 +76,7 @@ const routes = [
   },
   {
     path: "/przeslijPlik", get component() {
-      if (store.getters.role === "USER") {
+      if (store.getters.role === "USER" || store.getters.role ===  "ADMIN") {
         return FileUpload;
       } else {
         return NotAccess;

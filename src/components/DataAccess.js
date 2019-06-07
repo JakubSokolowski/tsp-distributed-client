@@ -86,7 +86,7 @@ var DataAccess = {
                     password: store.getters.password
                 }
             }
-        );
+        ).then(() => console.log('Sent stop message'));
     },
     addUser(user) {
         return axios.post(

@@ -8,6 +8,7 @@
           <div class="containerItem">
             <p>Data zlecenia: {{Problem.dateOfOrdering}}</p>
             <p>Typ algorytmu: {{Problem.algorithm}}</p>
+            <p>Czas Wykonywania [ms]: {{Problem.timeOfRunningInSeconds}}</p>
           </div>
         </div>
 

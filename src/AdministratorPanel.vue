@@ -2,23 +2,24 @@
   <div>
     <Menu/>
 
-    <div v-for="Problem in problems" class="container" :key="'Problem' + Problem.id">
+    <div v-for="Problem in problems"  class="container" :key="'Problem' + Problem.id">
         <div class="sideBar">
             <input type="button" class="elementLeftBar upArrow" value="▶️" @click="upProblem(Problem.id)">
             <input type="button" class="elementLeftBar downArrow" value="▶️" @click="downProblem(Problem.id)">
         </div>
         <div class="mainContent">
+            <p>Pozycja: {{Problem.indexInQueue}} ID: {{Problem.id}} Time: {{Problem.timeOfRunningInSeconds}}</p>
+            <p v-if="Problem.state">Stan: {{Problem.state}}</p>
             <p>Zlecający: {{Problem.user.username}} Data zlecenia: {{Problem.dateOfOrdering}}</p>
             <p>Algorytm: {{Problem.algorithm}} Progres: {{Problem.percentageOfProgress}}%</p>
-            <p>Ilość miast: {{Problem.graph.numOfCities}}</p>
-            
+            <p>Ilość miast: {{Problem.graph.numOfCities}}</p>            
         </div>
         <div v-if="Problem.percentageOfProgress < 100" class="sideBar">
-            <input type="button" v-if="!Problem.solving" class="element greenColor" value="▶️" @click="startProblem(Problem.id)">
-            <input type="button" v-if="Problem.solving" class="element greenColor" value="||" @click="stopProblem(Problem.id)">
-            <input type="button" class="element redColor" value="X">
+            <input type="button" v-if="Problem.state === 'ENQUEUED'" class="element greenColor" value="▶️" @click="startProblem(Problem.id)">
+            <input type="button" v-if="Problem.state === 'RUNNING'" class="element greenColor" value="||" @click="stopProblem(Problem.id)">
+            <input type="button" class="element redColor" value="X" @click="stopProblem(Problem.id)">
         </div>
-    </div>
+      </div>
   </div>
 </template>
 
@@ -26,6 +27,7 @@
 import Menu from "@/components/Menu.vue";
 import DataAccess from "@/components/DataAccess.js";
 import { error } from "util";
+import { finished } from 'stream';
 export default {
   name: "AdministratorPanel",
   components: {
@@ -47,8 +49,12 @@ export default {
   methods: {
     getData() {
       DataAccess.getProblemsForAdmin().then(response => {
-        this.problems = response.data;
+         this.problems = response.data.sort((a,b) => {
+          if(a.indexInQueue === b.indexInQueue) return 0;
+            return a.indexInQueue > b.indexInQueue ? 1: -1;
+          }).filter((j) => !(j.state === "FINISHED" || j.state ==="CANCELLED"))
       });
+      console.log(this.problems);
       this.prog += 1;
     },
     upProblem(problem) {
@@ -61,6 +67,7 @@ export default {
         DataAccess.startProblem(problem);
     },
     stopProblem(problem) {
+        console.log('Clicked stop problem')
         DataAccess.stopProblem(problem);
     },
   },
